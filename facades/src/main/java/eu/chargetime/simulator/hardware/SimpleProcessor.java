@@ -25,15 +25,15 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.IInterruptHandler;
+import eu.chargetime.simulator.hardware.io.IHWEventObserver;
 import eu.chargetime.simulator.hardware.io.IObservable;
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
 
-public class SimpleProcessor implements IInterruptHandler {
+public class SimpleProcessor implements IHWEventObserver {
 
-    private final IObservable<IInterruptHandler> observable;
+    private final IObservable<IHWEventObserver> observable;
 
-    public SimpleProcessor(IObservable<IInterruptHandler> observable) {
+    public SimpleProcessor(IObservable<IHWEventObserver> observable) {
         this.observable = observable;
     }
 
@@ -46,7 +46,7 @@ public class SimpleProcessor implements IInterruptHandler {
     }
 
     @Override
-    public void handleInterrupt(IHardwareEvent event) {
+    public void newEvent(IHardwareEvent event) {
 
     }
 }

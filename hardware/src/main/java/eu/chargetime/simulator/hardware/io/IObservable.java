@@ -26,6 +26,6 @@ package eu.chargetime.simulator.hardware.io;
  */
 
 public interface IObservable<T> {
-    void subscribe(T handler);
-    void unsubscribe(T handler);
+    void subscribe(T observer);
+    void unsubscribe(T observer);
 }

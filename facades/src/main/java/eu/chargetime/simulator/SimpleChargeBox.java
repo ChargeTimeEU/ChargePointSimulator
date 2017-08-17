@@ -37,7 +37,7 @@ public class SimpleChargeBox {
     private PlugInCommand plugInCommand;
     private PullPlugCommand pullPlugCommand;
 
-    public void SimpleChargeBox() {
+    public SimpleChargeBox() {
 
         BusController busController = new BusController();
         IOutlet type2outlet1 = new SimpleOutlet(busController);

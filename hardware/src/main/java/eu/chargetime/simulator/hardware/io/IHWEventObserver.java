@@ -27,6 +27,6 @@ package eu.chargetime.simulator.hardware.io;
 
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
 
-public interface IInterruptHandler {
-    void handleInterrupt(IHardwareEvent event);
+public interface IHWEventObserver {
+    void newEvent(IHardwareEvent event);
 }

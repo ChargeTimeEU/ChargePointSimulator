@@ -25,33 +25,33 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.IInterruptHandler;
+import eu.chargetime.simulator.hardware.io.IHWEventObserver;
 import eu.chargetime.simulator.hardware.io.IObservable;
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
 
 import java.util.HashSet;
 
-public class BusController implements IObservable<IInterruptHandler>, IBus {
+public class BusController implements IObservable<IHWEventObserver>, IBus {
 
-    private HashSet<IInterruptHandler> handlerList;
+    private final HashSet<IHWEventObserver> handlerList;
 
     public BusController() {
         handlerList = new HashSet<>();
     }
 
-    public void subscribe(IInterruptHandler handler) {
-        handlerList.add(handler);
+    public void subscribe(IHWEventObserver observer) {
+        handlerList.add(observer);
     }
 
-    public void unsubscribe(IInterruptHandler handler) {
-        handlerList.remove(handler);
+    public void unsubscribe(IHWEventObserver observer) {
+        handlerList.remove(observer);
     }
 
     @Override
     public void interrupt(IHardwareEvent event) {
-        for (IInterruptHandler handler: handlerList) {
+        for (IHWEventObserver handler: handlerList) {
             if (handler != null)
-                handler.handleInterrupt(event);
+                handler.newEvent(event);
         }
     }
 }
