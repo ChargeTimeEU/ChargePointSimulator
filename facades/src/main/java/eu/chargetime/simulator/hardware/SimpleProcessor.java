@@ -28,21 +28,26 @@ package eu.chargetime.simulator.hardware;
 import eu.chargetime.simulator.hardware.io.IHWEventObserver;
 import eu.chargetime.simulator.hardware.io.IObservable;
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
+import eu.chargetime.simulator.software.IFirmware;
 
 public class SimpleProcessor implements IHWEventObserver {
 
     private final IObservable<IHWEventObserver> observable;
+    private final IFirmware firmware;
 
-    public SimpleProcessor(IObservable<IHWEventObserver> observable) {
+    public SimpleProcessor(IObservable<IHWEventObserver> observable, IFirmware firmware) {
         this.observable = observable;
+        this.firmware = firmware;
     }
 
     public void start() {
         observable.subscribe(this);
+        firmware.bootup();
     }
 
     public void stop() {
         observable.unsubscribe(this);
+        firmware.shutdown();
     }
 
     @Override
