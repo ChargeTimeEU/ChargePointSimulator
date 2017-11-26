@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.software;
+package eu.chargetime.simulator.software.drivers;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,6 +25,20 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
+
+import java.util.Enumeration;
+
+public class DriverRepository implements IHardwareEventDriver {
+
+    private final Enumeration<IHardwareEventDriver> drivers;
+
+    public DriverRepository(Enumeration<IHardwareEventDriver> drivers) {
+        this.drivers = drivers;
+    }
+
+    @Override
+    public ISoftwareEvent handle(IHardwareEvent event) {
+        return null;
+    }
 }

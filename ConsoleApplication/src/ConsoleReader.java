@@ -1,4 +1,3 @@
-package eu.chargetime.simulator.software;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,6 +24,28 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+import java.util.Scanner;
+
+public class ConsoleReader implements Runnable {
+
+    private final IInputHandler handler;
+    private String prompt;
+
+    public ConsoleReader(IInputHandler handler) {
+        this.handler = handler;
+        prompt = "> ";
+    }
+
+    @Override
+    public void run() {
+        final Scanner in = new Scanner(System.in);
+        System.out.print(prompt);
+        while (in.hasNext()) {
+            final String line = in.nextLine();
+            handler.handle(line);
+            if (line.startsWith("quit"))
+                break;
+            System.out.print(prompt);
+        }
+    }
 }

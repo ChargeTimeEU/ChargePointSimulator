@@ -44,7 +44,7 @@ public class SimpleChargeBox {
         ILock lock1 = new SimpleLock(busController,false);
         OutletLockDecorator outlet1 = new OutletLockDecorator(type2outlet1, lock1);
 
-        new SimpleProcessor(busController);
+        new SimpleProcessor(busController, null);
 
         lockCommand = new LockCommand(lock1);
         unlockCommand = new UnlockCommand(lock1);

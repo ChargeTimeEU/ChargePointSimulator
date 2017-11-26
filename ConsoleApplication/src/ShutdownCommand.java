@@ -1,4 +1,3 @@
-package eu.chargetime.simulator.software;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,6 +24,18 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+import eu.chargetime.simulator.software.IFirmware;
+
+public class ShutdownCommand implements ICommand {
+
+    private final IFirmware firmware;
+
+    public ShutdownCommand(IFirmware firmware) {
+        this.firmware = firmware;
+    }
+
+    @Override
+    public void execute(String[] arguments) {
+        firmware.shutdown();
+    }
 }

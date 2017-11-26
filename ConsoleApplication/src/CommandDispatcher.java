@@ -1,4 +1,3 @@
-package eu.chargetime.simulator.software;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,6 +24,23 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+public class CommandDispatcher implements IInputHandler {
+
+    private final ICommandRepository repository;
+
+    public CommandDispatcher(ICommandRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public void handle(String input) {
+        String[] splittedInput = input.split(" ");
+        ICommand command = repository.createCommand(splittedInput[0]);
+
+        if (command != null)
+            command.execute(splittedInput);
+        else
+            System.out.println("Unknown command!");
+    }
+
 }

@@ -27,6 +27,6 @@ package eu.chargetime.simulator.software.drivers;
 
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
 
-public interface IDriver {
+public interface IHardwareEventDriver {
     ISoftwareEvent handle(IHardwareEvent event);
 }

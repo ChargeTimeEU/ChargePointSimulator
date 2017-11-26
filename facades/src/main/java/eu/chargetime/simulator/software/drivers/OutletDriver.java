@@ -27,7 +27,7 @@ package eu.chargetime.simulator.software.drivers;
 
 import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
 
-public class OutletDriver implements IDriver {
+public class OutletDriver implements IHardwareEventDriver {
 
     @Override
     public ISoftwareEvent handle(IHardwareEvent event) {

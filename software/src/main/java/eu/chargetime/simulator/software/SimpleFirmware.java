@@ -25,6 +25,23 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+public class SimpleFirmware implements IFirmware {
+
+    private boolean shutdown = false;
+
+    @Override
+    public void shutdown() {
+        shutdown = true;
+    }
+
+    @Override
+    public void run() {
+        while (!shutdown) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

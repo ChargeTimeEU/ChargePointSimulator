@@ -1,4 +1,3 @@
-package eu.chargetime.simulator.software;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,6 +24,25 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+import java.util.HashMap;
+
+public class CommandMap implements ICommandRepository {
+
+    private HashMap<String, ICommand> repository;
+
+    public CommandMap() {
+        repository = new HashMap<>();
+    }
+
+    public void addCommand(String name, ICommand command) {
+        repository.put(name, command);
+    }
+
+    @Override
+    public ICommand createCommand(String name) {
+        ICommand command = null;
+        if (repository.containsKey(name))
+            command = repository.get(name);
+        return command;
+    }
 }
