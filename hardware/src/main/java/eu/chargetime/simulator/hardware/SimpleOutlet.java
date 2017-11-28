@@ -25,16 +25,11 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.CableConnectedHWEvent;
-import eu.chargetime.simulator.hardware.io.events.CableDisconnectedHWEvent;
-
 public class SimpleOutlet implements IOutlet {
-    private final IBus bus;
 
     private boolean pluggedIn;
 
-    public SimpleOutlet(IBus bus) {
-        this.bus = bus;
+    public SimpleOutlet() {
         pluggedIn = false;
     }
 
@@ -42,7 +37,6 @@ public class SimpleOutlet implements IOutlet {
     public void plugin() {
         if (!pluggedIn) {
             pluggedIn = true;
-            bus.interrupt(new CableConnectedHWEvent());
         }
     }
 
@@ -50,7 +44,6 @@ public class SimpleOutlet implements IOutlet {
     public void pullplug() {
         if (pluggedIn) {
             pluggedIn = false;
-            bus.interrupt(new CableDisconnectedHWEvent());
         }
     }
 }

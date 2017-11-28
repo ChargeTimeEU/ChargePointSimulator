@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.hardware;
+package eu.chargetime.simulator;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,8 +25,26 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
+import eu.chargetime.simulator.commands.IsLockedCommand;
+import eu.chargetime.simulator.commands.LockCommand;
+import eu.chargetime.simulator.commands.UnlockCommand;
+import eu.chargetime.simulator.hardware.Events.LockEvents;
+import eu.chargetime.simulator.hardware.ILock;
+import eu.chargetime.simulator.hardware.SimpleLock;
 
-public interface IBus {
-    void interrupt(IHardwareEvent event);
+public class LockBox {
+
+    private ILock lock;
+
+    public final LockCommand lockCommand;
+    public final UnlockCommand unlockCommand;
+    public final IsLockedCommand isLockedCommand;
+
+    public LockBox() {
+        LockEvents firmware = new LockBoxFirmware();
+        lock = new SimpleLock(firmware,true);
+        lockCommand = new LockCommand(lock);
+        unlockCommand = new UnlockCommand(lock);
+        isLockedCommand = new IsLockedCommand(lock);
+    }
 }

@@ -1,7 +1,4 @@
-package eu.chargetime.simulator.hardware.io.commands;
-
-import eu.chargetime.simulator.hardware.IOutlet;
-
+package eu.chargetime.simulator;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -27,15 +24,18 @@ import eu.chargetime.simulator.hardware.IOutlet;
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
     SOFTWARE.
  */
-public class PullPlugCommand implements ICommand {
-    private final IOutlet outlet;
 
-    public PullPlugCommand(IOutlet outlet) {
-        this.outlet = outlet;
+import eu.chargetime.simulator.hardware.Events.LockEvents;
+
+public class LockBoxFirmware implements LockEvents {
+
+    @Override
+    public void onLocked() {
+        System.out.println("Locked");
     }
 
     @Override
-    public void execute() {
-        outlet.pullplug();
+    public void onUnlocked() {
+        System.out.println("Unlocked");
     }
 }

@@ -24,12 +24,10 @@
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.software.IFirmware;
-import eu.chargetime.simulator.software.SimpleFirmware;
+import eu.chargetime.simulator.LockBox;
 
 public class Program {
 
-    private IFirmware firmware;
     private ConsoleReader consoleReader;
 
     public static void main(String[] args) {
@@ -41,17 +39,16 @@ public class Program {
     }
 
     private void composeRoot() {
-        firmware = new SimpleFirmware();
+        LockBox lockBox = new LockBox();
         CommandMap commandMap = new CommandMap();
-        commandMap.addCommand("quit", new ShutdownCommand(firmware));
+        commandMap.addCommand("lock", lockBox.lockCommand);
+        commandMap.addCommand("unlock", lockBox.unlockCommand);
+        commandMap.addCommand("status", lockBox.isLockedCommand);
         CommandDispatcher commandDispatcher = new CommandDispatcher(commandMap);
         consoleReader = new ConsoleReader(commandDispatcher);
     }
 
     public void run() {
         new Thread(consoleReader).start();
-        System.out.println("Starting firmware.");
-        firmware.run();
-        System.out.println("Firmware stopped.");
     }
 }

@@ -24,6 +24,8 @@
     SOFTWARE.
  */
 
+import eu.chargetime.simulator.software.ICommand;
+
 public class CommandDispatcher implements IInputHandler {
 
     private final ICommandRepository repository;

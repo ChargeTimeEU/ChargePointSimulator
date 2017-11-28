@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.software.drivers;
+package eu.chargetime.simulator.commands;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,20 +25,19 @@ package eu.chargetime.simulator.software.drivers;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
+import eu.chargetime.simulator.hardware.ILock;
+import eu.chargetime.simulator.software.ICommand;
 
-import java.util.Enumeration;
+public class IsLockedCommand implements ICommand {
 
-public class DriverRepository implements IHardwareEventDriver {
+    private final ILock lock;
 
-    private final Enumeration<IHardwareEventDriver> drivers;
-
-    public DriverRepository(Enumeration<IHardwareEventDriver> drivers) {
-        this.drivers = drivers;
+    public IsLockedCommand(ILock lock) {
+        this.lock = lock;
     }
 
     @Override
-    public ISoftwareEvent handle(IHardwareEvent event) {
-        return null;
+    public void execute(String[] arguments) {
+        System.out.println(lock.isLocked());
     }
 }

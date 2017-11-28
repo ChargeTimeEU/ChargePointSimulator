@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.hardware.io;
+package eu.chargetime.simulator.commands;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,8 +25,20 @@ package eu.chargetime.simulator.hardware.io;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
+import eu.chargetime.simulator.hardware.ILock;
+import eu.chargetime.simulator.software.ICommand;
 
-public interface IHWEventObserver {
-    void newEvent(IHardwareEvent event);
+public class LockCommand implements ICommand {
+
+    private final ILock lock;
+
+    public LockCommand(ILock lock) {
+
+        this.lock = lock;
+    }
+
+    @Override
+    public void execute(String[] arguments) {
+        lock.lock();
+    }
 }

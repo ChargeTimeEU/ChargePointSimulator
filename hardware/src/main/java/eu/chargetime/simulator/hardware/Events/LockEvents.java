@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.software;
+package eu.chargetime.simulator.hardware.Events;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,23 +25,7 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public class SimpleFirmware implements IFirmware {
-
-    private boolean shutdown = false;
-
-    @Override
-    public void shutdown() {
-        shutdown = true;
-    }
-
-    @Override
-    public void run() {
-        while (!shutdown) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+public interface LockEvents {
+    void onLocked();
+    void onUnlocked();
 }

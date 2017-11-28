@@ -1,5 +1,4 @@
-package eu.chargetime.simulator.software.drivers;
-/*
+package eu.chargetime.simulator.software;/*
     ChargeTime.eu - Charge Point Simulator
     
     MIT License
@@ -25,8 +24,6 @@ package eu.chargetime.simulator.software.drivers;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.IHardwareEvent;
-
-public interface IHardwareEventDriver {
-    ISoftwareEvent handle(IHardwareEvent event);
+public interface ICommand {
+    void execute(String[] arguments);
 }

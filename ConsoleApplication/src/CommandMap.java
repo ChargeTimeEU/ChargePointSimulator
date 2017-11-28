@@ -24,6 +24,8 @@
     SOFTWARE.
  */
 
+import eu.chargetime.simulator.software.ICommand;
+
 import java.util.HashMap;
 
 public class CommandMap implements ICommandRepository {

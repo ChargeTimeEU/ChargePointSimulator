@@ -25,15 +25,14 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.io.events.LockedHWEvent;
-import eu.chargetime.simulator.hardware.io.events.UnlockedHWEvent;
+import eu.chargetime.simulator.hardware.Events.LockEvents;
 
 public class SimpleLock implements ILock {
-    private final IBus bus;
-    boolean locked;
+    private final LockEvents events;
+    private boolean locked;
 
-    public SimpleLock(IBus bus, boolean initialState) {
-        this.bus = bus;
+    public SimpleLock(LockEvents events, boolean initialState) {
+        this.events = events;
         locked = initialState;
     }
 
@@ -41,7 +40,7 @@ public class SimpleLock implements ILock {
     public void lock() {
         if (!locked) {
             locked = true;
-            bus.interrupt(new LockedHWEvent());
+            events.onLocked();
         }
     }
 
@@ -49,7 +48,7 @@ public class SimpleLock implements ILock {
     public void unlock() {
         if (locked) {
             locked=false;
-            bus.interrupt(new UnlockedHWEvent());
+            events.onUnlocked();
         }
     }
 

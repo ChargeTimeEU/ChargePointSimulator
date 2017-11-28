@@ -25,6 +25,7 @@ package eu.chargetime.simulator.software;
     SOFTWARE.
  */
 
-public interface IFirmware extends Runnable {
-    void shutdown();
+public interface IFirmware {
+    void stop();
+    void start();
 }
