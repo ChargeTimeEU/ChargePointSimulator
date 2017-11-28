@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.hardware;
+package eu.chargetime.simulator.hardware.Events;
 /*
     ChargeTime.eu - Charge Point Simulator
     

@@ -25,13 +25,13 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.Events.LockEvents;
+import eu.chargetime.simulator.hardware.Events.ILockEvents;
 
 public class SimpleLock implements ILock {
-    private final LockEvents events;
+    private final ILockEvents events;
     private boolean locked;
 
-    public SimpleLock(LockEvents events, boolean initialState) {
+    public SimpleLock(ILockEvents events, boolean initialState) {
         this.events = events;
         locked = initialState;
     }

@@ -28,4 +28,5 @@ import eu.chargetime.simulator.software.ICommand;
 
 public interface ICommandRepository {
     ICommand createCommand(String name);
+    String[] availableCommands();
 }

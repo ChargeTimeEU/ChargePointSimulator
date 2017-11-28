@@ -41,14 +41,21 @@ public class Program {
     private void composeRoot() {
         LockBox lockBox = new LockBox();
         CommandMap commandMap = new CommandMap();
+
         commandMap.addCommand("lock", lockBox.lockCommand);
         commandMap.addCommand("unlock", lockBox.unlockCommand);
         commandMap.addCommand("status", lockBox.isLockedCommand);
-        CommandDispatcher commandDispatcher = new CommandDispatcher(commandMap);
+        commandMap.addCommand("help", new HelpCommand(commandMap));
+        commandMap.addCommand("quit", arguments -> {System.out.println("Goodbye!");});
+
+        CommandDispatcher commandDispatcher = new CommandDispatcher(commandMap, arguments -> {
+            System.out.println("Unknown command! Write help for help (doh)");
+        });
         consoleReader = new ConsoleReader(commandDispatcher);
     }
 
     public void run() {
+        System.out.println("Simulator started.");
         new Thread(consoleReader).start();
     }
 }

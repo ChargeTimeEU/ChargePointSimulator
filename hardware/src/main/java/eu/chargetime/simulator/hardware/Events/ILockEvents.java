@@ -25,7 +25,7 @@ package eu.chargetime.simulator.hardware.Events;
     SOFTWARE.
  */
 
-public interface LockEvents {
+public interface ILockEvents {
     void onLocked();
     void onUnlocked();
 }

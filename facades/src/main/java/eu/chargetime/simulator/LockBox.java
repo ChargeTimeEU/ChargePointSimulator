@@ -28,7 +28,7 @@ package eu.chargetime.simulator;
 import eu.chargetime.simulator.commands.IsLockedCommand;
 import eu.chargetime.simulator.commands.LockCommand;
 import eu.chargetime.simulator.commands.UnlockCommand;
-import eu.chargetime.simulator.hardware.Events.LockEvents;
+import eu.chargetime.simulator.hardware.Events.ILockEvents;
 import eu.chargetime.simulator.hardware.ILock;
 import eu.chargetime.simulator.hardware.SimpleLock;
 
@@ -41,7 +41,7 @@ public class LockBox {
     public final IsLockedCommand isLockedCommand;
 
     public LockBox() {
-        LockEvents firmware = new LockBoxFirmware();
+        ILockEvents firmware = new LockBoxFirmware();
         lock = new SimpleLock(firmware,true);
         lockCommand = new LockCommand(lock);
         unlockCommand = new UnlockCommand(lock);

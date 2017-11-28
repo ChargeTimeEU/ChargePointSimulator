@@ -47,4 +47,9 @@ public class CommandMap implements ICommandRepository {
             command = repository.get(name);
         return command;
     }
+
+    @Override
+    public String[] availableCommands() {
+        return repository.keySet().toArray(new String[0]);
+    }
 }

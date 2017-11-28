@@ -29,9 +29,11 @@ import eu.chargetime.simulator.software.ICommand;
 public class CommandDispatcher implements IInputHandler {
 
     private final ICommandRepository repository;
+    private final ICommand defaultCommand;
 
-    public CommandDispatcher(ICommandRepository repository) {
+    public CommandDispatcher(ICommandRepository repository, ICommand defaultCommand) {
         this.repository = repository;
+        this.defaultCommand = defaultCommand;
     }
 
     @Override
@@ -39,10 +41,10 @@ public class CommandDispatcher implements IInputHandler {
         String[] splittedInput = input.split(" ");
         ICommand command = repository.createCommand(splittedInput[0]);
 
-        if (command != null)
-            command.execute(splittedInput);
-        else
-            System.out.println("Unknown command!");
+        if (command == null)
+            command = defaultCommand;
+
+        command.execute(splittedInput);
     }
 
 }
