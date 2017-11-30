@@ -37,7 +37,7 @@ public class UnlockCommand implements ICommand {
     }
 
     @Override
-    public void execute(String[] arguments) {
+    public void execute() {
         lock.unlock();
     }
 }

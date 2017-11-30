@@ -38,7 +38,7 @@ public class LockCommand implements ICommand {
     }
 
     @Override
-    public void execute(String[] arguments) {
+    public void execute() {
         lock.lock();
     }
 }

@@ -1,4 +1,4 @@
-package eu.chargetime.simulator;
+package eu.chargetime.simulator.commands;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,26 +25,19 @@ package eu.chargetime.simulator;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.commands.IsLockedCommand;
-import eu.chargetime.simulator.commands.LockCommand;
-import eu.chargetime.simulator.commands.UnlockCommand;
-import eu.chargetime.simulator.hardware.Events.ILockEvents;
-import eu.chargetime.simulator.hardware.ILock;
-import eu.chargetime.simulator.hardware.SimpleLock;
+import eu.chargetime.simulator.hardware.IOutlet;
+import eu.chargetime.simulator.software.ICommand;
 
-public class LockBox {
+public class PluginCommand implements ICommand {
 
-    private ILock lock;
+    private final IOutlet outlet;
 
-    public final LockCommand lockCommand;
-    public final UnlockCommand unlockCommand;
-    public final IsLockedCommand isLockedCommand;
+    public PluginCommand(IOutlet outlet) {
+        this.outlet = outlet;
+    }
 
-    public LockBox() {
-        ILockEvents firmware = new LockBoxFirmware();
-        lock = new SimpleLock(firmware,true);
-        lockCommand = new LockCommand(lock);
-        unlockCommand = new UnlockCommand(lock);
-        isLockedCommand = new IsLockedCommand(lock);
+    @Override
+    public void execute() {
+        outlet.plugin();
     }
 }

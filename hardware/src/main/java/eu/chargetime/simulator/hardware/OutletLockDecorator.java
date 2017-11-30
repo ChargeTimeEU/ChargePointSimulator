@@ -37,17 +37,18 @@ public class OutletLockDecorator implements IOutlet {
 
     @Override
     public void plugin() {
-        if (lock.isLocked())
-            throw new IllegalStateException();
-
-        outlet.plugin();
+        if (!lock.isLocked())
+            outlet.plugin();
     }
 
     @Override
     public void pullplug() {
-        if (lock.isLocked())
-            throw new IllegalStateException();
+        if (!lock.isLocked())
+            outlet.pullplug();
+    }
 
-        outlet.pullplug();
+    @Override
+    public boolean isPluggedIn() {
+        return outlet.isPluggedIn();
     }
 }

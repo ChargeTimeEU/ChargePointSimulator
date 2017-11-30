@@ -1,3 +1,4 @@
+package eu.chargetime.simulator.commands;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -24,23 +25,20 @@
     SOFTWARE.
  */
 
+import eu.chargetime.simulator.hardware.IOutlet;
 import eu.chargetime.simulator.software.ICommand;
 
-public class HelpCommand implements ICommand {
+public class PullPlugCommand implements ICommand {
 
-    private final ICommandRepository commands;
 
-    public HelpCommand(ICommandRepository commands) {
-        this.commands = commands;
+    private final IOutlet outlet;
+
+    public PullPlugCommand(IOutlet outlet) {
+        this.outlet = outlet;
     }
 
     @Override
     public void execute() {
-        System.out.println("Available commands:");
-
-        for (String command: commands.availableCommands()) {
-            System.out.println("  " + command);
-        }
-
+        outlet.pullplug();
     }
 }

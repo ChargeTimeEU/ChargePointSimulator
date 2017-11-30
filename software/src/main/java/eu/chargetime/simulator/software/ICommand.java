@@ -25,5 +25,5 @@ package eu.chargetime.simulator.software;/*
  */
 
 public interface ICommand {
-    void execute(String[] arguments);
+    void execute();
 }

@@ -24,7 +24,8 @@
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.LockBox;
+import eu.chargetime.simulator.ChargeBox;
+import eu.chargetime.simulator.software.ICommand;
 
 public class Program {
 
@@ -39,18 +40,19 @@ public class Program {
     }
 
     private void composeRoot() {
-        LockBox lockBox = new LockBox();
+        ChargeBox chargeBox = new ChargeBox();
         CommandMap commandMap = new CommandMap();
 
-        commandMap.addCommand("lock", lockBox.lockCommand);
-        commandMap.addCommand("unlock", lockBox.unlockCommand);
-        commandMap.addCommand("status", lockBox.isLockedCommand);
-        commandMap.addCommand("help", new HelpCommand(commandMap));
-        commandMap.addCommand("quit", arguments -> {System.out.println("Goodbye!");});
+        commandMap.addCommand("lock", chargeBox.lockCommand);
+        commandMap.addCommand("unlock", chargeBox.unlockCommand);
+        commandMap.addCommand("status", chargeBox.isLockedCommand);
+        commandMap.addCommand("plugin", chargeBox.pluginCommand);
+        commandMap.addCommand("plugout", chargeBox.pullPluginCommand);
 
-        CommandDispatcher commandDispatcher = new CommandDispatcher(commandMap, arguments -> {
-            System.out.println("Unknown command! Write help for help (doh)");
-        });
+        commandMap.addCommand("help", new HelpCommand(commandMap));
+        commandMap.addCommand("quit", () -> System.out.println("Goodbye!"));
+
+        IInputHandler commandDispatcher = new CommandDispatcher(commandMap, () -> System.out.println("Unknown command! Try with help"));
         consoleReader = new ConsoleReader(commandDispatcher);
     }
 

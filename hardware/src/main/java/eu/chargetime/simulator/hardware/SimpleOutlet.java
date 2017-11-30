@@ -25,11 +25,15 @@ package eu.chargetime.simulator.hardware;
     SOFTWARE.
  */
 
+import eu.chargetime.simulator.hardware.Events.IOutletEventHandler;
+
 public class SimpleOutlet implements IOutlet {
 
+    private final IOutletEventHandler handler;
     private boolean pluggedIn;
 
-    public SimpleOutlet() {
+    public SimpleOutlet(IOutletEventHandler handler) {
+        this.handler = handler;
         pluggedIn = false;
     }
 
@@ -37,6 +41,7 @@ public class SimpleOutlet implements IOutlet {
     public void plugin() {
         if (!pluggedIn) {
             pluggedIn = true;
+            handler.connected();
         }
     }
 
@@ -44,6 +49,12 @@ public class SimpleOutlet implements IOutlet {
     public void pullplug() {
         if (pluggedIn) {
             pluggedIn = false;
+            handler.disconnected();
         }
+    }
+
+    @Override
+    public boolean isPluggedIn() {
+        return pluggedIn;
     }
 }

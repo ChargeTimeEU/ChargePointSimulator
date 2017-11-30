@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.commands;
+package eu.chargetime.simulator.hardware.Events;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,19 +25,7 @@ package eu.chargetime.simulator.commands;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.ILock;
-import eu.chargetime.simulator.software.ICommand;
-
-public class IsLockedCommand implements ICommand {
-
-    private final ILock lock;
-
-    public IsLockedCommand(ILock lock) {
-        this.lock = lock;
-    }
-
-    @Override
-    public void execute(String[] arguments) {
-        System.out.println(lock.isLocked());
-    }
+public interface IOutletEventHandler {
+    void connected();
+    void disconnected();
 }

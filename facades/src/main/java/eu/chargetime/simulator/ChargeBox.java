@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.hardware.Events;
+package eu.chargetime.simulator;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,7 +25,31 @@ package eu.chargetime.simulator.hardware.Events;
     SOFTWARE.
  */
 
-public interface IOutletEvents {
-    void connected();
-    void disconnected();
+import eu.chargetime.simulator.commands.*;
+import eu.chargetime.simulator.hardware.*;
+import eu.chargetime.simulator.software.ocpp.CoreEventHandler;
+import eu.chargetime.simulator.software.ocpp.OCPPClient;
+
+public class ChargeBox {
+
+    private ILock lock;
+    private IOutlet outlet;
+
+    public final LockCommand lockCommand;
+    public final UnlockCommand unlockCommand;
+    public final StatusCommand isLockedCommand;
+    public final PluginCommand pluginCommand;
+    public final PullPlugCommand pullPluginCommand;
+
+    public ChargeBox() {
+        ChargeBoxFirmware firmware = new ChargeBoxFirmware();
+        lock = new SimpleLock(firmware,true);
+        outlet = new OutletLockDecorator(new SimpleOutlet(firmware), lock);
+
+        lockCommand = new LockCommand(lock);
+        unlockCommand = new UnlockCommand(lock);
+        isLockedCommand = new StatusCommand(lock, outlet);
+        pluginCommand = new PluginCommand(outlet);
+        pullPluginCommand = new PullPlugCommand(outlet);
+    }
 }

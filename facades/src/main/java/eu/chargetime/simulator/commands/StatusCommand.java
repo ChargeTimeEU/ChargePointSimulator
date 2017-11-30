@@ -1,4 +1,4 @@
-package eu.chargetime.simulator.hardware.Events;
+package eu.chargetime.simulator.commands;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,7 +25,23 @@ package eu.chargetime.simulator.hardware.Events;
     SOFTWARE.
  */
 
-public interface ILockEvents {
-    void onLocked();
-    void onUnlocked();
+import eu.chargetime.simulator.hardware.ILock;
+import eu.chargetime.simulator.hardware.IOutlet;
+import eu.chargetime.simulator.software.ICommand;
+
+public class StatusCommand implements ICommand {
+
+    private final ILock lock;
+    private final IOutlet outlet;
+
+    public StatusCommand(ILock lock, IOutlet outlet) {
+        this.lock = lock;
+        this.outlet = outlet;
+    }
+
+    @Override
+    public void execute() {
+        System.out.println(String.format("isLocked: %s", lock.isLocked()));
+        System.out.println(String.format("isPluggedIn: %s", outlet.isPluggedIn()));
+    }
 }

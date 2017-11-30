@@ -28,4 +28,5 @@ package eu.chargetime.simulator.hardware;
 public interface IOutlet {
     void plugin();
     void pullplug();
+    boolean isPluggedIn();
 }

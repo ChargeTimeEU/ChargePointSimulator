@@ -44,7 +44,7 @@ public class CommandDispatcher implements IInputHandler {
         if (command == null)
             command = defaultCommand;
 
-        command.execute(splittedInput);
+        command.execute();
     }
 
 }
