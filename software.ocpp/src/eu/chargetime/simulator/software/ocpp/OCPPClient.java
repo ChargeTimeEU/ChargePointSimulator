@@ -1,4 +1,4 @@
-package eu.chargetime.simulator;
+package eu.chargetime.simulator.software.ocpp;
 /*
     ChargeTime.eu - Charge Point Simulator
     
@@ -25,17 +25,27 @@ package eu.chargetime.simulator;
     SOFTWARE.
  */
 
-import eu.chargetime.simulator.hardware.Events.ILockEvents;
+import eu.chargetime.ocpp.ClientEvents;
+import eu.chargetime.ocpp.JSONClient;
+import eu.chargetime.ocpp.feature.profile.ClientCoreProfile;
 
-public class LockBoxFirmware implements ILockEvents {
+public class OCPPClient {
 
-    @Override
-    public void onLocked() {
-        System.out.println("Locked");
-    }
+    public OCPPClient(String uri, CoreEventHandler handler) {
 
-    @Override
-    public void onUnlocked() {
-        System.out.println("Unlocked");
+        ClientCoreProfile coreProfile = new ClientCoreProfile(handler);
+        JSONClient client = new JSONClient(coreProfile, "OCPPSimulator");
+
+        client.connect(uri, new ClientEvents() {
+            @Override
+            public void connectionOpened() {
+                System.out.println("Connected!");
+            }
+
+            @Override
+            public void connectionClosed() {
+                System.out.println("Connection lost!");
+            }
+        });
     }
 }

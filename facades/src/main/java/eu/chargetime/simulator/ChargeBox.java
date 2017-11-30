@@ -51,5 +51,7 @@ public class ChargeBox {
         isLockedCommand = new StatusCommand(lock, outlet);
         pluginCommand = new PluginCommand(outlet);
         pullPluginCommand = new PullPlugCommand(outlet);
+
+        new OCPPClient("localhost:8887", new CoreEventHandler(unlockCommand));
     }
 }
