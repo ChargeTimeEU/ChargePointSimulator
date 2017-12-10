@@ -27,7 +27,12 @@ package eu.chargetime.simulator.software.ocpp;
 
 import eu.chargetime.ocpp.ClientEvents;
 import eu.chargetime.ocpp.JSONClient;
+import eu.chargetime.ocpp.OccurenceConstraintException;
+import eu.chargetime.ocpp.UnsupportedFeatureException;
 import eu.chargetime.ocpp.feature.profile.ClientCoreProfile;
+import eu.chargetime.ocpp.model.Confirmation;
+
+import java.util.concurrent.CompletableFuture;
 
 public class OCPPClient {
 
@@ -40,6 +45,14 @@ public class OCPPClient {
             @Override
             public void connectionOpened() {
                 System.out.println("Connected!");
+                try {
+                    CompletableFuture<Confirmation> confirmation = client.send(coreProfile.createBootNotificationRequest("ChargeTimeEU", "Simulator"));
+                    confirmation.whenComplete((confirmation1, throwable) -> System.out.println("Booted"));
+                } catch (UnsupportedFeatureException e) {
+                    e.printStackTrace();
+                } catch (OccurenceConstraintException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
