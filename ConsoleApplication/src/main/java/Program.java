@@ -25,7 +25,6 @@
  */
 
 import eu.chargetime.simulator.ChargeBox;
-import eu.chargetime.simulator.software.ICommand;
 
 public class Program {
 

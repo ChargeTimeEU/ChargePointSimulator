@@ -52,6 +52,6 @@ public class ChargeBox {
         pluginCommand = new PluginCommand(outlet);
         pullPluginCommand = new PullPlugCommand(outlet);
 
-        new OCPPClient("http://127.0.0.1:8890", new CoreEventHandler(unlockCommand));
+        new OCPPClient("http://localhost:8890", new CoreEventHandler(unlockCommand));
     }
 }

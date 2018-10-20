@@ -32,7 +32,7 @@ import eu.chargetime.ocpp.UnsupportedFeatureException;
 import eu.chargetime.ocpp.feature.profile.ClientCoreProfile;
 import eu.chargetime.ocpp.model.Confirmation;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class OCPPClient {
 
@@ -46,7 +46,7 @@ public class OCPPClient {
             public void connectionOpened() {
                 System.out.println("Connected!");
                 try {
-                    CompletableFuture<Confirmation> confirmation = client.send(coreProfile.createBootNotificationRequest("ChargeTimeEU", "Simulator"));
+                    CompletionStage<Confirmation> confirmation = client.send(coreProfile.createBootNotificationRequest("ChargeTimeEU", "Simulator"));
                     confirmation.whenComplete((confirmation1, throwable) -> System.out.println("Booted"));
                 } catch (UnsupportedFeatureException e) {
                     e.printStackTrace();
